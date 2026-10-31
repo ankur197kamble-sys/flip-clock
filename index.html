@@ -17,7 +17,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,500..800&family=Figtree:wght@400;500;600&display=swap">
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="styles.css?v=2">
   <script>
     // Apply the saved theme before first paint so there is no flash.
     try {
@@ -108,6 +108,7 @@
 
       <section>
         <h3>Clock</h3>
+        <label class="row"><span>Flip animation</span><input type="checkbox" class="switch" id="set-flip"></label>
         <label class="row"><span>24-hour time</span><input type="checkbox" class="switch" id="set-h24"></label>
         <label class="row"><span>Show seconds</span><input type="checkbox" class="switch" id="set-seconds"></label>
         <label class="row"><span>Show date</span><input type="checkbox" class="switch" id="set-date"></label>
@@ -144,6 +145,6 @@
 
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
-  <script src="app.js"></script>
+  <script src="app.js?v=2"></script>
 </body>
 </html>

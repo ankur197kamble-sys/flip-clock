@@ -6,7 +6,7 @@
   const TIMER_KEY = 'flipclock.timer';
 
   const DEFAULTS = {
-    theme: 'auto', h24: false, seconds: false, showDate: true, wake: true,
+    theme: 'auto', h24: false, seconds: false, showDate: true, wake: true, flipAnim: true,
     focus: 25, short: 5, long: 15, every: 4, autoStart: false, chime: true,
     mode: 'clock', intention: ''
   };
@@ -27,7 +27,6 @@
   function saveSettings() { try { localStorage.setItem(SETTINGS_KEY, JSON.stringify(S)); } catch (e) {} }
   function saveTimer() { try { localStorage.setItem(TIMER_KEY, JSON.stringify(T)); } catch (e) {} }
 
-  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
   const app = $('app');
   const flips = [$('f-a'), $('f-b'), $('f-c')];
   const pad = (n) => String(n).padStart(2, '0');
@@ -50,7 +49,9 @@
     el.dataset.v = value;
     const [top, bottom, leafTop, leafBottom] = el._s;
 
-    if (old === undefined || !animate || reduceMotion.matches || document.hidden) {
+    // The flip is the point of the app, so it runs even when the OS asks for less motion.
+    // It can be turned off in Settings → Flip animation.
+    if (old === undefined || !animate || !S.flipAnim || document.hidden) {
       top.textContent = bottom.textContent = leafTop.textContent = leafBottom.textContent = value;
       el.classList.remove('flipping');
       return;
@@ -66,7 +67,7 @@
     el._t = setTimeout(() => {
       bottom.textContent = value;
       el.classList.remove('flipping');
-    }, 600);
+    }, 720);
   }
 
   /* ---------- Clock ---------- */
@@ -380,7 +381,7 @@
   /* ---------- Settings ---------- */
 
   const dialog = $('settings');
-  const bindCheck = { 'set-h24': 'h24', 'set-seconds': 'seconds', 'set-date': 'showDate', 'set-wake': 'wake', 'set-autostart': 'autoStart', 'set-chime': 'chime' };
+  const bindCheck = { 'set-flip': 'flipAnim', 'set-h24': 'h24', 'set-seconds': 'seconds', 'set-date': 'showDate', 'set-wake': 'wake', 'set-autostart': 'autoStart', 'set-chime': 'chime' };
   const bindNum = { 'set-focus': ['focus', 1, 99], 'set-short': ['short', 1, 60], 'set-long': ['long', 1, 60], 'set-every': ['every', 2, 8] };
 
   function syncSettingsForm() {

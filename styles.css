@@ -313,16 +313,23 @@ button { cursor: pointer; }
 .leaf-bottom { transform-origin: 50% 0; }
 
 .flipping .leaf { display: block; }
-.flipping .leaf-top { animation: flip-top .26s cubic-bezier(.55, 0, .85, .4) both; }
-.flipping .leaf-bottom { animation: flip-bottom .3s cubic-bezier(.2, .75, .35, 1.15) .26s both; }
+.flipping .leaf-top { animation: flip-top .32s cubic-bezier(.5, 0, .9, .45) both; }
+.flipping .leaf-bottom { animation: flip-bottom .38s cubic-bezier(.15, .8, .35, 1.12) .32s both; }
+/* The lower half darkens while the leaf falls over it, like a real shadow. */
+.flipping .bottom:not(.leaf) { animation: shade .7s ease-out both; }
 
 @keyframes flip-top {
   from { transform: rotateX(0deg); filter: brightness(1); }
-  to   { transform: rotateX(-90deg); filter: brightness(.7); }
+  to   { transform: rotateX(-90deg); filter: brightness(.55); }
 }
 @keyframes flip-bottom {
-  from { transform: rotateX(90deg); filter: brightness(1.15); }
+  from { transform: rotateX(90deg); filter: brightness(1.25); }
   to   { transform: rotateX(0deg); filter: brightness(1); }
+}
+@keyframes shade {
+  0%   { filter: brightness(1); }
+  45%  { filter: brightness(.72); }
+  100% { filter: brightness(1); }
 }
 
 .ampm {
@@ -630,7 +637,6 @@ kbd {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .flipping .leaf { display: none; }
   .sheet[open] { animation: none; }
   .progress i { transition: none; }
 }
