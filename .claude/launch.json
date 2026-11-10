@@ -1,6 +1,0 @@
-{
-  "version": "0.0.1",
-  "configurations": [
-    { "name": "flip-clock", "runtimeExecutable": "python", "runtimeArgs": ["-m", "http.server", "5180", "--directory", "D:/Flip Clock"], "port": 5180 }
-  ]
-}
