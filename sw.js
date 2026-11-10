@@ -1,5 +1,5 @@
 // Offline support: the app shell is cached on install, fonts are cached the first time they load.
-const VERSION = 'flipclock-v2';
+const VERSION = 'flipclock-v3';
 const SHELL = [
   './',
   'index.html',
